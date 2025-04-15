@@ -75,7 +75,7 @@ func main() {
 	)
 
 	now := time.Now()
-	pool := worker.NewPoll(cfg.Pool, gen.SendEvents)
+	pool := worker.NewPool(cfg.Pool, gen.SendEvents)
 	pool.Run(ctx)
 	log.Info("take time:", time.Since(now))
 }

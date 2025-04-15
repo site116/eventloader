@@ -17,7 +17,7 @@ type Pool struct {
 }
 
 // NewPool creates a new worker pool with the given configuration and sender function.
-func NewPoll(cfg config.Pool, sender func(context.Context, int) error) *Pool {
+func NewPool(cfg config.Pool, sender func(context.Context, int) error) *Pool {
 	return &Pool{cfg: cfg, sender: sender}
 }
 
