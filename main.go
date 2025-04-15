@@ -25,12 +25,19 @@ func main() {
 		"template.json",
 		"path to template file",
 	)
+
+	configPath := flag.String(
+		"config",
+		"config.yml",
+		"path to config file",
+	)
+
 	flag.Parse()
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetLevel(log.InfoLevel)
 
 	// Read the cfg file for the values
-	configBytes, err := os.ReadFile("config.yml")
+	configBytes, err := os.ReadFile(*configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +48,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Info("Config loaded successfully")
+	log.Infof("Config loaded successfully: %+v", cfg)
 
 	// Create producer
 	producer := initProducer(cfg.Broker)
@@ -75,7 +82,7 @@ func main() {
 	)
 
 	now := time.Now()
-	pool := worker.NewPoll(cfg.Pool, gen.SendEvents)
+	pool := worker.NewPool(cfg.Pool, gen.SendEvents)
 	pool.Run(ctx)
 	log.Info("take time:", time.Since(now))
 }
