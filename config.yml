@@ -1,0 +1,14 @@
+---
+broker:
+  topic: "auth.auditEvent.received"
+  seeds:
+    - "localhost:9092"
+  sasl:
+    enabled: true
+    username: 'emm'
+    password: 'ocs'
+pool:
+  num_workers: 5
+  messagesPerBatch: 10
+  batches: 100
+  errorThreshold: 2
