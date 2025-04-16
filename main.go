@@ -41,7 +41,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Info("Config loaded successfully")
+	log.Infof("Config loaded successfully: %+v", cfg)
 
 	// Create producer
 	producer := initProducer(cfg.Broker)

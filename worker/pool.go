@@ -40,7 +40,7 @@ func (p *Pool) Run(ctx context.Context) {
 		}
 		sem <- struct{}{}
 		wg.Add(1)
-		go func() {
+		go func(i int) {
 			defer func() {
 				<-sem
 				wg.Done()
@@ -51,6 +51,7 @@ func (p *Pool) Run(ctx context.Context) {
 			if errorCounter.Load() >= p.cfg.ErrorThreshold {
 				cancel()
 			}
-		}()
+		}(i)
 	}
+	wg.Wait()
 }

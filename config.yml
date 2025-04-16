@@ -14,10 +14,10 @@ broker:
     password: 'ocs'
 pool:
   # Number of worker threads to process messages
-  num_workers: 5
+  num_workers: 1
   # Number of messages to process in each batch
   messagesPerBatch: 10
   # Number of batches to process before stopping
-  batches: 100
+  batches: 1
   # Number of errors allowed before stopping the worker
   errorThreshold: 2
