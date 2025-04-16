@@ -25,12 +25,19 @@ func main() {
 		"template.json",
 		"path to template file",
 	)
+
+	configPath := flag.String(
+		"config",
+		"config.yml",
+		"path to config file",
+	)
+
 	flag.Parse()
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetLevel(log.InfoLevel)
 
 	// Read the cfg file for the values
-	configBytes, err := os.ReadFile("config.yml")
+	configBytes, err := os.ReadFile(*configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
