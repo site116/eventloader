@@ -47,7 +47,7 @@ func (g *EventGenerator) Generate() string {
 
 // GenerateBatch generates a batch of events.
 func (g *EventGenerator) BatchGenerate() []string {
-	var events []string
+	events := make([]string, 0, g.batchSize)
 	for i := 0; i < int(g.batchSize); i++ {
 		value := g.Generate()
 		events = append(events, value)
@@ -61,7 +61,7 @@ func (g *EventGenerator) SendEvents(ctx context.Context, batch int) error {
 	// Create a new batch
 	jsonMessages := g.BatchGenerate()
 	// Send the batch to the broker
-	var records []*kgo.Record
+	records := make([]*kgo.Record, 0, len(jsonMessages))
 	for _, msg := range jsonMessages {
 		records = append(records, &kgo.Record{
 			Topic: g.topic,
