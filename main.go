@@ -56,9 +56,6 @@ func main() {
 		log.Fatal(err)
 	}
 	defer producer.Close()
-	if err := producer.Ping(ctx); err != nil {
-		log.Fatal(err)
-	}
 	log.Info("Connected to broker")
 
 	// Read the template file for the JSON structure
